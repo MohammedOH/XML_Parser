@@ -60,15 +60,19 @@ def parse_seatmap2(file):
 
 
 def main():
-    for i in range(1, len(sys.argv)):
-        xml_to_json('%s.xml' % sys.argv[i])
-
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 2:
         print('Please pass filenames as argument')
-    elif sys.argv[1] == 'seatmap1' and sys.argv[2] == 'seatmap2':
-        # Parsing seatmap1 & seatmap1 throw system args (file name)
-        parse_seatmap1('%s.xml' % sys.argv[1])
-        parse_seatmap2('%s.xml' % sys.argv[2])
+        return
+
+    for i in range(1, len(sys.argv)):
+        # Parsing seatmap1 & seatmap1 through system args (filename)
+        if sys.argv[i] == 'seatmap1':
+            parse_seatmap1('%s.xml' % sys.argv[i])
+        elif sys.argv[i] == 'seatmap2':
+            parse_seatmap2('%s.xml' % sys.argv[i])
+
+        # Parsing all content of the xml file
+        xml_to_json('%s.xml' % sys.argv[i])
 
 
 if __name__ == '__main__':
